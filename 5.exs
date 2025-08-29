@@ -5,13 +5,21 @@ defmodule Main do
 
   def pedir_datos() do
     placa = "Ingrese la placa del vehiculo: " |> Util.input()
-    tipo = Util.input("Ingrese el tipo de vehiculo: ", :string)
+    tipo = String.upcase(Util.input("Ingrese el tipo de vehiculo: ", :string))
     peso = Util.input("Ingrese el peso del vehiculo: ", :float)
-    valor_tarita = Float.round((calcular_rendimiento(km, lts)),2)
-    Util.show_message("#{nombre}, el rendimiento es de #{rendimiento} kms por litro")
+    tarifa_final = Float.to_string((calcular_tarifa(tipo, peso)), decimals: 0)
+    tupla = {placa, tipo, tarifa_final}
+    Util.show_message(Kernel.inspect(tupla))
+    Util.show_message("Vehiculo #{placa} (#{tipo}) debe pagar $#{tarifa_final}")
   end
 
-  def calcular_rendimiento(km, lts), do: km/lts
+  def calcular_tarifa(tipo, peso) do
+    cond do
+      tipo == "MOTO" -> 5000.0
+      tipo == "CARRO" -> 10000.0
+      tipo == "CAMION" -> 2000 * peso + 20000
+    end
+  end
 end
 
 Main.main()
