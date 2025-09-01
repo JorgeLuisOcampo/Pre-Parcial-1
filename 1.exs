@@ -1,3 +1,5 @@
+# Integrantes:  Jorge Luis Ocampo Ocampo, Santiago Vallejo Botero
+
 defmodule Main do
   def main() do
     pedir_datos()
