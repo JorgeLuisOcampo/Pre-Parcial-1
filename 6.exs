@@ -1,15 +1,29 @@
 defmodule Main do
   def main() do
-    pedir_datos()
+      def envio_paquete()
   end
 
-  def pedir_datos() do
-    nombre = "Ingrese el nombre del cliente: " |> Util.input()
-    peso = Util.input("Ingrese el peso del paquete en kg: ", :float)
-    tipo = String.upcase(Util.input("Ingresar el tipo de envío (Economico, Express, Internacional).", :string))
+  def envio_paquete() do
+    nombre = get_nombre()
+    peso =  get_peso()
+    tipo = get_tipo()
     costo_total = Float.to_string((calcular_tarifa(tipo, peso)), decimals: 0)
     tupla = {nombre, peso, tipo, costo_total}
     Util.show_message(Kernel.inspect(tupla))
+  end
+
+  def get_tipo() do
+    String.upcase(Util.input("Ingresar el tipo de envío
+    (Economico, Express, Internacional).", :string))
+  end
+
+  def get_peso() do
+    Util.input("Ingrese el peso del paquete en kg: ", :float)
+  end
+
+  def get_nombre() do
+    "Ingrese el nombre del cliente: "
+    |> Util.input()
   end
 
   def calcular_tarifa(tipo, peso) do
@@ -25,5 +39,6 @@ defmodule Main do
     end
   end
 end
+
 
 Main.main()

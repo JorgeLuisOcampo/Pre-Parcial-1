@@ -1,16 +1,29 @@
 defmodule Main do
   def main() do
-    pedir_datos()
+    registro_peaje()
   end
 
-  def pedir_datos() do
-    placa = "Ingrese la placa del vehiculo: " |> Util.input()
-    tipo = String.upcase(Util.input("Ingrese el tipo de vehiculo: ", :string))
-    peso = Util.input("Ingrese el peso del vehiculo: ", :float)
+  def registro_peaje() do
+    placa = get_placa()
+    tipo = get_tipo_vehiculo()
+    peso = get_peso()
     tarifa_final = Float.to_string((calcular_tarifa(tipo, peso)), decimals: 0)
     tupla = {placa, tipo, tarifa_final}
     Util.show_message(Kernel.inspect(tupla))
     Util.show_message("Vehiculo #{placa} (#{tipo}) debe pagar $#{tarifa_final}")
+  end
+
+  def get_peso() do
+    Util.input("Ingrese el peso del vehiculo: ", :float)
+  end
+
+  def get_placa() do
+    "Ingrese la placa del vehiculo: "
+    |> Util.input()
+  end
+
+  def get_tipo_vehiculo() do
+    String.upcase(Util.input("Ingrese el tipo de vehiculo: ", :string))
   end
 
   def calcular_tarifa(tipo, peso) do
