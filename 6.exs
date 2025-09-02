@@ -1,6 +1,6 @@
 defmodule Main do
   def main() do
-      def envio_paquete()
+      envio_paquete()
   end
 
   def envio_paquete() do
